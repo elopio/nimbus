@@ -6,11 +6,11 @@ description: |
   this minimal color-changing applet.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: strict
+confinement: devmode
 
 apps:
   nimbus:
-    command: com.github.danrabbit.nimbus
+    command: desktop-launch $SNAP/com.github.danrabbit.nimbus
     plugs: [network, x11]
 
 parts:
@@ -23,9 +23,9 @@ parts:
       - libgweather-3-dev
       - meson
       - valac
-    stage-packages: [geoclue-2.0]
+    stage-packages: [geoclue-2.0, libgweather-3-6]
     install: mv snapbuild/com.github.danrabbit.nimbus $SNAPCRAFT_PART_INSTALL
-    after: [meson]
+    after: [meson, desktop-gtk3]
   meson:
     source: https://github.com/mesonbuild/meson
     source-type: git
