@@ -24,6 +24,7 @@ parts:
       - meson
       - valac
     stage-packages: [geoclue-2.0]
+    install: mv snapbuild/com.github.danrabbit.nimbus $SNAPCRAFT_PART_INSTALL
     after: [meson]
   meson:
     source: https://github.com/mesonbuild/meson
@@ -32,4 +33,3 @@ parts:
     plugin: python
     build-packages: [ninja-build]
     prime: [-*]
-    install: mv snapbuild/com.github.danrabbit.nimbus $SNAPCRAFT_PART_INSTALL
