@@ -1,0 +1,35 @@
+name: nimbus
+version: git
+summary: A minimal weather applet
+description: |
+  See the current temperature and weather conditions for your location with
+  this minimal color-changing applet.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+apps:
+  nimbus:
+    command: com.github.danrabbit.nimbus
+    plugs: [network, x11]
+
+parts:
+  nimbus:
+    source: .
+    plugin: meson
+    build-packages:
+      - libgeoclue-2-dev
+      - libgtk-3-dev
+      - libgweather-3-dev
+      - meson
+      - valac
+    stage-packages: [geoclue-2.0]
+    after: [meson]
+  meson:
+    source: https://github.com/mesonbuild/meson
+    source-type: git
+    source-tag: 0.40.1
+    plugin: python
+    build-packages: [ninja-build]
+    prime: [-*]
+    install: mv snapbuild/com.github.danrabbit.nimbus $SNAPCRAFT_PART_INSTALL
